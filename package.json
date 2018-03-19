@@ -7,6 +7,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.1",
+    "package.json": "^2.0.1",
     "swagger-express-mw": "^0.7.0",
     "swagger-jsdoc": "^1.9.7",
     "swagger-tools": "^0.10.1"

@@ -20,7 +20,7 @@ const swaggerDefinition = {
   swagger: '2.0',
   info: {
     version: '1.0.0',
-    title: 'サンプル API DOC',
+    title: 'Sample API DOC',
   },
   schemes: ['http', 'https'],
   consumes: ['application/json', 'multipart/form-data'],
