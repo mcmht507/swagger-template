@@ -1,0 +1,73 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: スクアルAPI DOC
+# host: localhost:3000
+basePath: /api/v1.0
+schemes:
+  - http
+  - https
+consumes:
+  - application/json
+  - multipart/form-data
+produces:
+  - application/json
+securityDefinitions:
+  ApiKeyAuth:
+    type: apiKey
+    in: header
+    name: X-API-Key
+paths:
+  /images:
+    x-swagger-router-controller: images
+    get:
+      security:
+        - ApiKeyAuth: []
+      description: 投稿画像一覧取得
+      summary: 画像一覧取得
+      operationId: getImages
+      parameters:
+        - name: popular
+          in: query
+          description: 人気順にソートする
+          required: false
+          type: boolean
+        - name: disabled
+          in: query
+          description: |
+            有効フラグ
+
+            true：開封済みのみ取得
+
+            false:開封済みでないものを取得
+
+            なし：全て取得
+          required: false
+          type: string
+          enum:
+            - only
+            - with
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/ExampleResponseObject"
+        "500":
+          description: Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /swagger:
+    x-swagger-pipe: swagger_raw
+
+definitions:
+  ExampleResponseObject:
+    properties:
+      key:
+        type: string
+  ErrorResponse:
+    required:
+      - msg
+    properties:
+      msg:
+        type: string

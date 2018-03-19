@@ -1,0 +1,7 @@
+{
+	"apiConfig": {
+		"host": "XXX.XXX.XXX.XXX:",
+		"port": 3000,
+		"baseUrl": "/baseUrl"
+	}
+}

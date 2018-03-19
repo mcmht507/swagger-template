@@ -1,0 +1,6 @@
+{
+    "name": "doc-server",
+    "script": "app.js",
+    "exec_mode": "fork",
+    "log-date-format": "YYYY-MM-DD HH:mm Z"
+}

@@ -1,0 +1,167 @@
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+paths:
+  /samples:
+    x-swagger-router-controller: sample
+    get:
+      security:
+        - Bearer: []
+      description: サンプルの一覧取得
+      summary: サンプルの一覧取得
+      operationId: getSamples
+      parameters:
+        - name: type
+          in: query
+          description: |
+            種別
+
+            sample1:サンプル１
+
+            sample2:サンプル２
+
+          type: string
+          enum:
+            - sample1
+            - sample2
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/ExampleResponseObject"
+        "500":
+          description: Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+    post:
+      security:
+        - Bearer: []
+      description: サンプルの登録
+      summary: サンプルの登録
+      operationId: postSamples
+      consumes:
+         - multipart/form-data
+      parameters:
+        - name: title
+          in: formData
+          type: string
+          required: true
+          description: タイトル
+        - name: content
+          in: formData
+          type: string
+          required: true
+          description: 投稿内容
+        - name: upfile
+          in: formData
+          type: file
+          description: 画像ファイル
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/ExampleResponseObject"
+        "500":
+          description: Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /samples/{samples_id}:
+    x-swagger-router-controller: sample
+    get:
+      security:
+        - Bearer: []
+      description: サンプルの詳細取得
+      summary: サンプルの詳細取得
+      operationId: getSampleId
+      parameters:
+        - name: sample_id
+          in: path
+          description: サンプルID
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/ExampleResponseObject"
+        "500":
+          description: Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+    patch:
+      security:
+        - Bearer: []
+      description: サンプルの更新
+      summary: サンプルの更新
+      operationId: pacthSample
+      consumes:
+         - multipart/form-data
+      parameters:
+        - name: sample_id
+          in: path
+          description: サンプルID
+          required: true
+          type: integer
+        - name: title
+          in: formData
+          type: string
+          description: タイトル
+        - name: content
+          in: formData
+          type: string
+          description: 投稿内容
+        - name: upfile
+          in: formData
+          type: file
+          description: 画像ファイル
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/ExampleResponseObject"
+        "500":
+          description: Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+    delete:
+      security:
+        - Bearer: []
+      description: サンプルの削除処理
+      summary: サンプルの削除処理
+      operationId: deleteComments
+      parameters:
+        - name: sample_id
+          in: path
+          description: サンプルID
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/ExampleResponseObject"
+        "500":
+          description: Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /swagger:
+    x-swagger-pipe: swagger_raw
+
+definitions:
+  ExampleResponseObject:
+    properties:
+      key:
+        type: string
+  ErrorResponse:
+    required:
+      - msg
+    properties:
+      msg:
+        type: string
